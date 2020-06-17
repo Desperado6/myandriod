@@ -13,11 +13,14 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.sql.DatabaseMetaData;
+
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText editXYH,editMiMa_1,editMiMa_2;
     private Button button;
     private ImageView returnImage;
     private TextView dengLu;
+    private  MyDatabaseHelper dbHelper;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         dengLu.setOnClickListener(this);
         returnImage=(ImageView)findViewById(R.id.iv_return);
         returnImage.setOnClickListener(this);
+        dbHelper=new MyDatabaseHelper(this,"Market",null,1);
+        Button button2 =findViewById(R.id.button);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dbHelper.getWritableDatabase();
+            }
+        });
     }
 
     @Override
